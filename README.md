@@ -1,4 +1,6 @@
-# Cyclistic
+![logo](/readme/logo.svg)
+
+# bcycling
 
 ## Introduction
 
