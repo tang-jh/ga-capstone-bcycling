@@ -1,1 +1,1 @@
-web: gunicorn bcyclingbackend.wsgi
+web:gunicorn bcyclingbackend.wsgi
