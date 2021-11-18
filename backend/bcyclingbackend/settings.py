@@ -88,13 +88,15 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('REMOTE_DB_NAME', 'LOCAL_DB_NAME'),
-        'USER': os.environ.get('REMOTE_DB_USER', 'LOCAL_DB_USER'),
-        'PASSWORD': os.environ.get('REMOTE_DB_PASSWORD', 'LOCAL_DB_PASSWORD'),
-        'HOST': os.environ.get('REMOTE_DB_HOST', 'LOCAL_DB_HOST'),
-        'PORT': os.environ.get('REMOTE_DB_PORT', 'LOCAL_DB_PORT')
+        'NAME': os.environ.get('REMOTE_DB_NAME', 'bcycling'),
+        'USER': os.environ.get('REMOTE_DB_USER', 'postgres'),
+        'PASSWORD': os.environ.get('REMOTE_DB_PASSWORD', '123456'),
+        'HOST': os.environ.get('REMOTE_DB_HOST', 'localhost'),
+        'PORT': os.environ.get('REMOTE_DB_PORT', '5432')
     }
 }
+
+print(os.environ.get('REMOTE_DB_NAME', 'LOCAL_DB_NAME'))
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
