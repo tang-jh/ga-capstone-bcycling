@@ -1,7 +1,5 @@
 ![logo](/readme/logo.svg)
 
-# bcycling
-
 ## Introduction
 
 A social app for cycling enthusiasts. Users are able to plan their route to determine its accessibility (path width, crossings, obstacles etc). Users can also share their routes with friends, directly adding map features/annotations to reach one another. Friends can comment on each other's routes.
