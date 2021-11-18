@@ -19,6 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
 import environ
 import os
 import django_heroku
@@ -30,10 +31,12 @@ SECRET_KEY = os.environ.get(
     'SECRET_KEY',
     'django-insecure-ux%z5ok3(&ynq2=_&ji65#ji#u)kgq2-_#nf1ady^_xt5!xde7')
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['https://ancient-badlands-59019.herokuapp.com/']
+
 
 # Application definition
 
@@ -47,6 +50,7 @@ INSTALLED_APPS = [
 
     #Local Apps
     'friends.apps.FriendsConfig'
+
 ]
 
 MIDDLEWARE = [
@@ -85,6 +89,7 @@ WSGI_APPLICATION = 'bcyclingbackend.wsgi.application'
 
 DATABASES = {
     'default': {
+
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -97,6 +102,7 @@ DATABASES = {
 }
 
 print(os.environ.get('REMOTE_DB_NAME', 'LOCAL_DB_NAME'))
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -133,6 +139,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -144,6 +151,7 @@ STATICFILES_DIRS = BASE_DIR, 'static'
 # print(
 #     f'\n\n Basedir = {BASE_DIR}, \n\n PROJECT_ROOT = {PROJECT_ROOT}, \n\n StaticUrl = {STATIC_URL}, \n\nStaticRoot = {STATIC_ROOT}, \n\nSTATICFILES_DIRS = {STATICFILES_DIRS}'
 # )
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -159,3 +167,4 @@ DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 django_heroku.settings(locals())
+
