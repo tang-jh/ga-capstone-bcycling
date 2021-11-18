@@ -33,7 +33,7 @@ SECRET_KEY = os.environ.get(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://ancient-badlands-59019.herokuapp.com/']
 
 # Application definition
 
@@ -137,7 +137,11 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR, 'staticfiles'
-STATICFILES_DIRS = (BASE_DIR, 'static')
+STATICFILES_DIRS = BASE_DIR, 'static'
+
+# print(
+#     f'\n\n Basedir = {BASE_DIR}, \n\n PROJECT_ROOT = {PROJECT_ROOT}, \n\n StaticUrl = {STATIC_URL}, \n\nStaticRoot = {STATIC_ROOT}, \n\nSTATICFILES_DIRS = {STATICFILES_DIRS}'
+# )
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
