@@ -12,6 +12,9 @@ class Friend(models.Model):
                                   related_name="friend",
                                   on_delete=models.CASCADE)
     accepted = models.DateTimeField(null=True, blank=True)
+<<<<<<< HEAD
 
     class Meta:
         db_table = 'friend'
+=======
+>>>>>>> 675b158609e8e0970f393dca5c355fff533e3e3e
