@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
     #External Apps
     'rest_framework',
+    'rest_framework_gis',
     'corsheaders',
 
     #Local Apps
