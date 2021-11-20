@@ -43,7 +43,7 @@ API routes
 
 | Technology                                                                                    | Type                                          |
 | --------------------------------------------------------------------------------------------- | --------------------------------------------- |
-| [React Native](https://reactnative.dev/)                                                      | Front-end                                     |
+| [React](https://reactjs.org/)                                                                 | Front-end                                     |
 | [Django (GeoDjango)](https://www.djangoproject.com/)                                          | Back-end                                      |
 | PostGreSQL[(PostGIS)](https://postgis.net/)                                                   | Database                                      |
 | [Leaflet.js](https://leafletjs.com/)                                                          | JS library for maps                           |
