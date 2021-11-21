@@ -1,15 +1,17 @@
-from django.db import models
+from django.contrib.gis.db import models
+from django.contrib.gis.geos import Polygon
 from django.conf import settings
 
 
 # Create your models here.
-class BRoute(models.Model):
+class Broute(models.Model):
     r_id = models.BigAutoField(primary_key=True)
     userFK = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE)
     title = models.CharField(max_length=200, default='No title')
-    route = models.TextField()
-    distance = models.DecimalField(decimal_places=2)
+    route = models.LineStringField()  #models.TextField()
+    bbox = models.PolygonField(default=Polygon())
+    distance = models.DecimalField(max_digits=15, decimal_places=2)
     difficulty_choices = [('EASY', 'Easy'), ('INTERMEDIATE', 'Intermediate'),
                           ('DIFFICULT', 'Difficult')]
     difficulty = models.CharField(max_length=15,
@@ -27,7 +29,7 @@ class BRoute(models.Model):
 class Comment(models.Model):
     c_id = models.BigAutoField(primary_key=True)
     comment = models.TextField(max_length=500)
-    routeFK = models.ForeignKey(BRoute, on_delete=models.CASCADE)
+    routeFK = models.ForeignKey(Broute, on_delete=models.CASCADE)
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now=True)
