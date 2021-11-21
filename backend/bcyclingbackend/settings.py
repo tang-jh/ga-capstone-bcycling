@@ -103,12 +103,19 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': os.environ.get('REMOTE_DB_NAME', 'bcycling'),
-        'USER': os.environ.get('REMOTE_DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('REMOTE_DB_PASSWORD', '123456'),
-        'HOST': os.environ.get('REMOTE_DB_HOST', 'localhost'),
-        'PORT': os.environ.get('REMOTE_DB_PORT', '5432')
+        'ENGINE':
+        os.environ.get('REMOTE_DB_ENGINE',
+                       'django.contrib.gis.db.backends.postgis'),
+        'NAME':
+        os.environ.get('REMOTE_DB_NAME', 'bcycling'),
+        'USER':
+        os.environ.get('REMOTE_DB_USER', 'postgres'),
+        'PASSWORD':
+        os.environ.get('REMOTE_DB_PASSWORD', '123456'),
+        'HOST':
+        os.environ.get('REMOTE_DB_HOST', 'localhost'),
+        'PORT':
+        os.environ.get('REMOTE_DB_PORT', '5432')
     }
 }
 
