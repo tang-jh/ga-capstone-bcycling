@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'corsheaders',
 
     #Local Apps
-    'friends.apps.FriendsConfig'
+    'friends.apps.FriendsConfig',
+    'broutes.apps.BroutesConfig'
 ]
 
 MIDDLEWARE = [
