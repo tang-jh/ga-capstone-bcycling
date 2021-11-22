@@ -29,7 +29,9 @@ class Broute(models.Model):
 class Comment(models.Model):
     c_id = models.BigAutoField(primary_key=True)
     comment = models.TextField(max_length=500)
-    routeFK = models.ForeignKey(Broute, on_delete=models.CASCADE)
+    routeFK = models.ForeignKey(Broute,
+                                on_delete=models.CASCADE,
+                                related_name='comments')
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now=True)
