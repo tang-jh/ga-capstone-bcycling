@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.db.models.constraints import UniqueConstraint
 
 
 # Create your models here.
@@ -16,3 +17,7 @@ class Friend(models.Model):
 
     class Meta:
         db_table = 'friends'
+        constraints = [
+            UniqueConstraint(fields=['requester', 'to_friend'],
+                             name='friend_pair')
+        ]
