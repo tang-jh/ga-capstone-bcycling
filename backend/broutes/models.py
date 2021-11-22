@@ -18,8 +18,8 @@ class Broute(models.Model):
                                   choices=difficulty_choices,
                                   default='EASY')
     description = models.TextField(max_length=500, blank=True)
-    created = models.DateTimeField(null=True, blank=True)
-    edited = models.DateTimeField(null=True, blank=True)
+    created = models.DateTimeField(null=True, blank=True, auto_now_add=True)
+    edited = models.DateTimeField(null=True, blank=True, auto_now=True)
     deleted = models.DateTimeField(null=True, blank=True)
 
     class Meta:
