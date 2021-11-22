@@ -4,7 +4,7 @@ from django.conf import settings
 
 # Create your models here.
 class Friend(models.Model):
-    f_id = models.AutoField(primary_key=True)
+    f_id = models.BigAutoField(primary_key=True)
     requester = models.ForeignKey(settings.AUTH_USER_MODEL,
                                   related_name="requester",
                                   on_delete=models.CASCADE)
@@ -12,3 +12,7 @@ class Friend(models.Model):
                                   related_name="friend",
                                   on_delete=models.CASCADE)
     accepted = models.DateTimeField(null=True, blank=True)
+    rejected = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        db_table = 'friends'
