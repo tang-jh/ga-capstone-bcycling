@@ -1,4 +1,3 @@
-# from django.contrib.gis.geos import LineString, Polygon
 from .models import Broute, Comment
 from rest_framework import serializers
 from rest_framework_gis import serializers as gis_serializers
