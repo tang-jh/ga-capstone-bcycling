@@ -23,11 +23,14 @@ class BrouteViewSet(viewsets.ModelViewSet):
 
 
 class DashboardView(generics.ListAPIView):
+    serializer_class = BrouteSerializer
     permission_classes = [IsAuthenticated]
 
-    def get_queryset(self, request):
-        is_requester = Q(requester=request.user)
+    def get_queryset(self):
+        is_requester = Q(requester=self.request.user)
         not_accepted = Q(accepted__isnull=False)
-        friends = Friend.objects.filter(is_requester & not_accepted)
+        friends = Friend.objects.filter(is_requester
+                                        & not_accepted).values_list(
+                                            'to_friend', flat=True)
         friend_feed = Broute.objects.filter(userFK__in=Subquery(friends))
         return friend_feed
