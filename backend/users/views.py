@@ -1,10 +1,9 @@
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-# from django.contrib.auth import get_user_model
-from django.db.models.query_utils import refs_expression
-from rest_framework import generics, serializers, status, permissions
-from rest_framework.decorators import permission_classes
+from rest_framework import generics, status, permissions
 from rest_framework.response import Response
-from .serializers import UserSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
+from .serializers import TokenSerializer, UserSerializer
 
 
 class CreateUserView(generics.CreateAPIView):
@@ -21,7 +20,6 @@ class CreateUserView(generics.CreateAPIView):
             return Response(
                 {'error': 'Password must be at least 8 characters long'})
         User.objects.create_user(username=username, password=password)
-
         return Response(request.data)
 
 
@@ -33,3 +31,16 @@ class LoginView(generics.ListCreateAPIView):
     def create(self, request):
         username = request.data.get('username', '')
         password = request.data.get('password', '')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            refresh = RefreshToken.for_user(user)
+            serialized_token = TokenSerializer(
+                data={
+                    'token': str(refresh.access_token),
+                    'refresh': str(refresh)
+                })
+            serialized_token.is_valid()
+            return Response(serialized_token.data)
+        return Response({'msg': 'unauthorized'},
+                        status=status.HTTP_401_UNAUTHORIZED)

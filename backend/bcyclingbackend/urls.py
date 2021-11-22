@@ -18,7 +18,7 @@ from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.routers import DefaultRouter
 from broutes.views import BrouteViewSet
-from users.views import CreateUserView
+from users.views import CreateUserView, LoginView
 
 router = DefaultRouter()
 router.register(r'broutes', BrouteViewSet, 'broutes')
@@ -26,6 +26,7 @@ router.register(r'broutes', BrouteViewSet, 'broutes')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/signup/', CreateUserView.as_view()),
+    path('login/', LoginView.as_view()),
     path('api/token/', TokenObtainPairView.as_view(),
          name='token_obtain_pair'),
     path('api/token/refresh/',
