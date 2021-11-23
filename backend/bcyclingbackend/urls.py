@@ -19,9 +19,12 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.routers import DefaultRouter
 from broutes.views import BrouteViewSet, DashboardView, CommentView
 from users.views import CreateUserView, LoginView
+from friends.views import FriendViewSet, FriendPendingViewSet
 
 router = DefaultRouter()
 router.register(r'broutes', BrouteViewSet, 'broutes')
+router.register(r'friends', FriendViewSet, 'friends')
+router.register(r'to_review', FriendPendingViewSet, 'to_review')
 
 urlpatterns = [
     path('api/admin/', admin.site.urls),

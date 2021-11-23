@@ -1,10 +1,14 @@
-from django.http.request import _Q
+from django.contrib.auth.models import User
 from rest_framework import views, viewsets, generics
+from rest_framework.decorators import permission_classes, action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.db.models import Q
 from .serializers import FriendSerializer
 from .models import Friend
+import datetime
+
+now = datetime.datetime.now()
 
 
 class FriendViewSet(viewsets.ModelViewSet):
@@ -15,6 +19,40 @@ class FriendViewSet(viewsets.ModelViewSet):
         user = self.request.user
         not_accepted = Q(accepted__isnull=True)
         is_rejected = Q(rejected__isnull=False)
-        friends = Friend.objects.filter(requester=user).exclude(not_accepted
-                                                                & is_rejected)
-        return friends  #not tested yet
+        friends = Friend.objects.filter(
+            requester=user).exclude(not_accepted).exclude(is_rejected)
+        return friends
+
+
+class FriendPendingViewSet(viewsets.ModelViewSet):
+    serializer_class = FriendSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        is_accepted = Q(accepted__isnull=False)
+        is_rejected = Q(rejected__isnull=False)
+        friends = Friend.objects.filter(
+            to_friend=user).exclude(is_accepted).exclude(is_rejected)
+
+        return friends
+
+    def update(self, request, pk):  #accept friend method
+        # write method to block if user != to_friend
+        requester_name = Friend.objects.only('requester').get(
+            f_id=pk).requester
+        requester = User.objects.get(username=requester_name)
+        Friend.objects.filter(f_id=pk).update(accepted=now)
+        Friend.objects.create(requester=self.request.user,
+                              to_friend=requester,
+                              accepted=now)
+        return Response(request.data)
+
+    @action(detail=True, methods=['PUT'])
+    def reject(self, request, pk):
+        # write method to block if user != to_friend
+        Friend.objects.filter(f_id=pk).update(rejected=now)
+        return Response(request.data)
+
+
+# class PeopleView
