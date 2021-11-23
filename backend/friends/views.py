@@ -1,10 +1,11 @@
 from django.contrib.auth.models import User
+from django.db.models.expressions import Subquery
 from rest_framework import views, viewsets, generics
 from rest_framework.decorators import permission_classes, action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.db.models import Q
-from .serializers import FriendSerializer
+from .serializers import FriendSerializer, PeopleSerializer
 from .models import Friend
 import datetime
 
@@ -22,6 +23,17 @@ class FriendViewSet(viewsets.ModelViewSet):
         friends = Friend.objects.filter(
             requester=user).exclude(not_accepted).exclude(is_rejected)
         return friends
+
+    def create(self, request):  #friend request
+        id = request.data.get('id', '')
+        to_friend = User.objects.get(id=id)
+        Friend.objects.create(requester=self.request.user, to_friend=to_friend)
+        return Response('Friend requested')
+
+    # kiv unfriend method
+    # @action(detail=True, methods=['PUT'])
+    # def unfriend(self, request, *args, **kwargs):
+    #     return super().update(request, *args, **kwargs)
 
 
 class FriendPendingViewSet(viewsets.ModelViewSet):
@@ -55,4 +67,14 @@ class FriendPendingViewSet(viewsets.ModelViewSet):
         return Response(request.data)
 
 
-# class PeopleView
+class PeopleViewSet(viewsets.ModelViewSet):
+    serializer_class = PeopleSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        acquainted = Friend.objects.filter(requester=user).values_list(
+            'to_friend', flat=True)
+        people = User.objects.exclude(id__in=Subquery(acquainted)).exclude(
+            is_superuser=True)
+        return people
