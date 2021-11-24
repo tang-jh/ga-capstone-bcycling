@@ -1,23 +1,113 @@
-// import React, { useState, useEffect } from "react";
-// import "axios";
-// import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { atom, useAtom } from "jotai";
+import Swal from "sweetalert2";
+
+export const tokenAtom = atom();
 
 const LoginSignup = (props) => {
-  //   const [trial, setTrial] = useState({});
-  //   useEffect(() => {
-  //     const getUsers = async () => {
-  //       const res = await axios.get("/api/testview/");
-  //       setTrial(res.data);
-  //     };
-  //     getUsers();
-  //   }, []);
+  const { mode, constants } = props;
+  const [token, setToken] = useAtom(tokenAtom);
+  const [status, setStatus] = useState("idle");
+  const [inputVal, setInputVal] = useState({});
+  const navigate = useNavigate();
 
-  //   console.log(trial);
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setStatus("pending");
+    const username = e.target.username.value;
+    const password = e.target.password.value;
+    axios
+      .post(`/api/token/`, { username: username, password: password })
+      .then((res) => {
+        console.log("login success");
+        setToken(res.data);
+        setStatus("resolved");
+        Swal.fire({
+          text: `Redirecting to dashboard page`,
+          timer: 1500,
+        }).then(() => {
+          navigate("/dashboard", { replace: true });
+        });
+      })
+      .catch((err) => {
+        console.log("login failed");
+        setStatus("error");
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.detail,
+          timer: 1500,
+        });
+      });
+  };
+
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    setStatus("pending");
+    const username = e.target.username.value;
+    const password = e.target.password.value;
+    axios
+      .post(`/api/signup/`, { username: username, password: password })
+      .then((res) => {
+        setStatus("resolved");
+        Swal.fire({
+          text: `${res.data.detail} \nRedirecting to login page`,
+          timer: 1500,
+        }).then(() => {
+          navigate("/login", { replace: true });
+        });
+      })
+      .catch((err) => {
+        const errMsg = err.response.data;
+        setStatus("error");
+        if (errMsg.target === "username") {
+          Swal.fire({
+            icon: "error",
+            text: errMsg.detail,
+            timer: 1500,
+          }).then(() => {
+            document.querySelector("#username-input").value = "";
+            document.querySelector("#password-input").value = "";
+            setInputVal({});
+          });
+        }
+      });
+  };
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    if (e.target.name === "username") {
+      setInputVal({ ...inputVal, username: e.target.value });
+    } else if (e.target.name === "password") {
+      setInputVal({ ...inputVal, password: e.target.value });
+    }
+    console.log(inputVal);
+  };
 
   return (
     <div>
-      <p>Login Signup component</p>
-      <p>Mode: {props.mode}</p>
+      <form onSubmit={mode === constants.LOGIN ? handleLogin : handleSignUp}>
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          name="username"
+          id="username-input"
+          onChange={handleChange}
+        />
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="password-input"
+          onChange={handleChange}
+        />
+        <input
+          type="submit"
+          value={mode === constants.LOGIN ? "Log In" : "Sign Up"}
+          disabled={inputVal?.password?.length >= 8 ? false : true}
+        />
+      </form>
     </div>
   );
 };

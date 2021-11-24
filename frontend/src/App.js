@@ -1,4 +1,4 @@
-import "./App.css";
+// import "./App.css";
 import "axios";
 import { Route, Routes } from "react-router-dom";
 import LoginSignup from "./components/pages/LoginSignup";

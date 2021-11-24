@@ -1,12 +1,15 @@
 import React from "react";
-import Navbar from "./Navbar";
+import Topbar from "./Topbar";
+import { Container } from "react-bootstrap";
 
 const Layout = (props) => {
+  console.log("PROPS CHILDREN:", props.children);
+  console.log("Child name", props.children.props.children);
   return (
-    <div>
-      <Navbar />
+    <Container>
+      <Topbar />
       <div>{props.children}</div>
-    </div>
+    </Container>
   );
 };
 
