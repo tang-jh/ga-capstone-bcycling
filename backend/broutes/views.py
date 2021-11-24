@@ -1,3 +1,4 @@
+from django.db.models.query import QuerySet
 from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -7,7 +8,6 @@ from friends.models import Friend
 from .serializers import BrouteSerializer, CommentSerializer
 
 
-# Create your views here.
 class BrouteViewSet(viewsets.ModelViewSet):
     queryset = Broute.objects.exclude(deleted__isnull=False)
     serializer_class = BrouteSerializer
@@ -31,6 +31,7 @@ class DashboardView(generics.ListAPIView):
 
 class CommentView(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         comments = Comment.objects.filter(routeFK=self.kwargs['r_id']).exclude(
@@ -44,3 +45,9 @@ class CommentView(generics.ListCreateAPIView):
         routeFK = Broute.objects.get(r_id=r_id)
         Comment.objects.create(author=author, comment=comment, routeFK=routeFK)
         return Response(request.data)
+
+
+class CommentDetailView(generics.RetrieveAPIView):
+    serializer_class = CommentSerializer
+    queryset = Comment.objects.all()
+    permission_classes = [IsAuthenticated]

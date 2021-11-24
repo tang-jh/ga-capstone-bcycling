@@ -16,18 +16,26 @@ A social app for cycling enthusiasts. Users are able to plan their route to dete
 
 ### Frontend
 
-**React Native**
+**React**
 
-| Components  | Description                                                                                |
-| ----------- | ------------------------------------------------------------------------------------------ |
-| Navbar      | App-wide top navbar                                                                        |
-| LoginSignup | Form view for login or signup                                                              |
-| ListTable   | Item-selectable list component for "friend's feed, route lists(own/friend), comment posts) |
-| Map         | Map component to display routes                                                            |
-| RouteR      | View to display specific routes (own/friend)                                               |
-| RouteCU     | Form view for creating new route or editing existing routes                                |
-| RouteIndex  | View index table of routes(own/friend)                                                     |
-| Dashboard   | View user's dashboard                                                                      |
+| Components        | Description                                                                                |
+| ----------------- | ------------------------------------------------------------------------------------------ |
+| Navbar            | `Sub-component` - App-wide top navbar                                                      |
+| LoginSignup       | `Page` - Page for login/signup                                                             |
+| LoginSignup       | Form view for login or signup                                                              |
+| ListTable         | Item-selectable list component for "friend's feed, route lists(own/friend), comment posts) |
+| Map               | `Sub-component` - Map component to display routes                                          |
+| RouteView         | `Page` - View to display specific routes (own/friend)                                      |
+| RouteCreateUpdate | `Page` - Form view for creating new route or editing existing routes                       |
+| RouteList         | `Page` - View index table of routes(own/friend)                                            |
+| Dashboard         | `Page` - View user's dashboard                                                             |
+| CommentReply      | `Sub-component` - Modal for showing and creating comments                                  |
+| PeopleIndex       | `Page` - Page for showing list of people (friends list, people list, pending list)         |
+| PeopleThumb       | `Sub-component` - Thumbnail for people cards                                               |
+| PeopleProfile     | `Page` - Page for persons profile (friend request, accept/reject friend)                   |
+
+**SiteMap**
+![Sitemap](/readme/sitemap.png)
 
 ### Backend
 
@@ -35,9 +43,9 @@ A social app for cycling enthusiasts. Users are able to plan their route to dete
 
 API routes
 
-| API         | Route         |
-| ----------- | ------------- |
-| Create user | /api/user/new |
+| API     | Route     |
+| ------- | --------- |
+| api.... | /api/.... |
 
 ## Technologies
 

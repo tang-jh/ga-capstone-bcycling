@@ -76,5 +76,10 @@ class PeopleViewSet(viewsets.ModelViewSet):
         acquainted = Friend.objects.filter(requester=user).values_list(
             'to_friend', flat=True)
         people = User.objects.exclude(id__in=Subquery(acquainted)).exclude(
-            is_superuser=True)
+            is_superuser=True).exclude(username=user)
         return people
+
+
+# class TestViewSet(viewsets.ModelViewSet):
+#     queryset = User.objects.all()
+#     serializer_class = PeopleSerializer
