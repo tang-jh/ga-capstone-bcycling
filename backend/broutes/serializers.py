@@ -15,7 +15,8 @@ class BrouteSerializer(gis_serializers.GeoFeatureModelSerializer):
     class Meta:
         model = Broute
         geo_field = 'route'
-        bbox_geo_field = 'bbox'
+        # bbox_geo_field = 'bbox'
+        auto_bbox = True
         fields = '__all__'
 
 

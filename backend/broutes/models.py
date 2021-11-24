@@ -10,8 +10,8 @@ class Broute(models.Model):
                                on_delete=models.CASCADE)
     title = models.CharField(max_length=200, default='No title')
     route = models.LineStringField()  #models.TextField()
-    bbox = models.PolygonField(default=Polygon())
-    distance = models.DecimalField(max_digits=15, decimal_places=2)
+    # bbox = models.PolygonField(default=Polygon())
+    distance = models.DecimalField(max_digits=15, decimal_places=4)
     difficulty_choices = [('EASY', 'Easy'), ('INTERMEDIATE', 'Intermediate'),
                           ('DIFFICULT', 'Difficult')]
     difficulty = models.CharField(max_length=15,

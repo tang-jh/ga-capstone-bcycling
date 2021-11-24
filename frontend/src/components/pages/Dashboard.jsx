@@ -4,11 +4,14 @@ import ListTable from "../ListTable";
 import axios from "axios";
 import { tokenAtom } from "./LoginSignup";
 import { useAtom } from "jotai";
+import { useNavigate } from "react-router";
 
 const Dashboard = () => {
   const [status, setStatus] = useState("idle");
   const [pageData, setPageData] = useState({});
   const [token, setToken] = useAtom(tokenAtom);
+  const navigate = useNavigate();
+
   useEffect(() => {
     setStatus("pending");
     axios
@@ -33,10 +36,19 @@ const Dashboard = () => {
   }, []);
   console.log(token);
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    navigate("/myroutes/new");
+  };
+
   return (
     <Container>
       <Stack className="mt-5" gap={5}>
-        <Button className="col-sm-6 mx-auto" variant="primary">
+        <Button
+          className="col-sm-6 mx-auto"
+          variant="primary"
+          onClick={handleClick}
+        >
           Plan New Route
         </Button>
         <ListTable
