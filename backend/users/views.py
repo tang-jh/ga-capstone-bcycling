@@ -15,12 +15,19 @@ class CreateUserView(generics.CreateAPIView):
         username = request.data.get('username', '')
         password = request.data.get('password', '')
         if User.objects.filter(username=username).exists():
-            return Response({'msg': 'Choose another username'})
+            return Response(
+                {
+                    'detail': 'Choose another username',
+                    'target': 'username'
+                },
+                status=status.HTTP_400_BAD_REQUEST)
         if len(password) < 8:
             return Response(
-                {'error': 'Password must be at least 8 characters long'})
+                {'detail': 'Password must be at least 8 characters long'},
+                status=status.HTTP_400_BAD_REQUEST)
         User.objects.create_user(username=username, password=password)
-        return Response(request.data)
+        return Response({'detail': 'Sign up successful'},
+                        status=status.HTTP_201_CREATED)
 
 
 class LoginView(generics.ListCreateAPIView):

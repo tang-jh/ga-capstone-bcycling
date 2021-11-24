@@ -52,11 +52,15 @@ API routes
 | Technology                                                                                    | Type                                          |
 | --------------------------------------------------------------------------------------------- | --------------------------------------------- |
 | [React](https://reactjs.org/)                                                                 | Front-end                                     |
+| [React Bootstrap](https://react-bootstrap.github.io/)                                         | React styling component library               |
 | [Django (GeoDjango)](https://www.djangoproject.com/)                                          | Back-end                                      |
 | PostGreSQL[(PostGIS)](https://postgis.net/)                                                   | Database                                      |
 | [Leaflet.js](https://leafletjs.com/)                                                          | JS library for maps                           |
-| [React-Leaflet]()                                                                             | React component library for maps              |
+| [React-Leaflet](https://react-leaflet.js.org/)                                                | React component library for maps              |
 | [Leaflet-routing-machine](https://www.liedman.net/leaflet-routing-machine/api/)               | Leaflet plugins for routing controls          |
 | [Leaflet.encoded](https://github.com/jieter/Leaflet.encoded)                                  | Leaflet plugin for encoding/decoding polyline |
+| [Jotai](https://jotai.org/)                                                                   | React library for global state management     |
+| [SweetAlert2](https://sweetalert2.github.io/)                                                 | JS library for alerts and modals              |
+| [jwt-decode](https://github.com/auth0/jwt-decode)                                             | JS library for decoding jwt                   |
 | [Graphhopper](https://www.graphhopper.com/)                                                   | Map routing service                           |
 | [Graphhopper API clients (for Python)](https://github.com/graphhopper/directions-api-clients) | API client libraries for Graphhopper          |
