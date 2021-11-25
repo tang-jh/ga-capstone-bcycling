@@ -30,7 +30,7 @@ const Dashboard = () => {
         console.log("Dashboard data: ", dataArr);
       })
       .catch((err) => {
-        console.log(err.response.status);
+        // console.log(err.response.status);
         // Method to auto refresh token and continue the action
       });
   }, []);

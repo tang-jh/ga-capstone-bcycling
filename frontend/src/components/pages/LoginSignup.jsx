@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { atom, useAtom } from "jotai";
 import Swal from "sweetalert2";
+import { Container } from "react-bootstrap";
 
 export const tokenAtom = atom(null);
 
 const LoginSignup = (props) => {
   const { mode, constants } = props;
-  const [token, setToken] = useAtom(tokenAtom);
+  const setToken = useAtom(tokenAtom)[1];
   const [status, setStatus] = useState("idle");
   const [inputVal, setInputVal] = useState({});
   const navigate = useNavigate();
@@ -83,7 +84,7 @@ const LoginSignup = (props) => {
   };
 
   return (
-    <div>
+    <Container>
       <form onSubmit={mode === constants.LOGIN ? handleLogin : handleSignUp}>
         <label htmlFor="username">Username</label>
         <input
@@ -105,7 +106,7 @@ const LoginSignup = (props) => {
           disabled={inputVal?.password?.length >= 8 ? false : true}
         />
       </form>
-    </div>
+    </Container>
   );
 };
 

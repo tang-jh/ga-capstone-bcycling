@@ -26,7 +26,7 @@ const constants = {
 };
 
 function App() {
-  const [token, setToken] = useAtom(tokenAtom);
+  const token = useAtom(tokenAtom)[0];
 
   return (
     <div className="App">
@@ -96,28 +96,27 @@ function App() {
                 <Navigate replace to="/login" />
               )
             }
-          >
-            <Route
-              path="comments/:c_id"
-              element={
-                token ? (
-                  <CommentReply mode={constants.READ} constants={constants} />
-                ) : (
-                  <Navigate replace to="/login" />
-                )
-              }
-            />
-            <Route
-              path="comments/new"
-              element={
-                token ? (
-                  <CommentReply mode={constants.CREATE} constants={constants} />
-                ) : (
-                  <Navigate replace to="/login" />
-                )
-              }
-            />
-          </Route>
+          />
+          <Route
+            path="comments/:c_id"
+            element={
+              token ? (
+                <CommentReply mode={constants.READ} constants={constants} />
+              ) : (
+                <Navigate replace to="/login" />
+              )
+            }
+          />
+          <Route
+            path="comments/new"
+            element={
+              token ? (
+                <CommentReply mode={constants.CREATE} constants={constants} />
+              ) : (
+                <Navigate replace to="/login" />
+              )
+            }
+          />
           <Route
             path="/friends"
             element={
