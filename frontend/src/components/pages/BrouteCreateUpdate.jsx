@@ -86,7 +86,6 @@ const BrouteCreateUpdate = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const routeData = route.paths[0];
-    // inputVal.bbox = routeData.bbox;
     inputVal.distance = routeData.distance;
     inputVal.route = routeData.points;
     inputVal.userFK = jwt_decode(token.access).user_id;

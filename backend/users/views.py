@@ -1,9 +1,9 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from rest_framework import generics, status, permissions
+from rest_framework import generics, status, permissions, viewsets
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import TokenSerializer, UserSerializer
+from .serializers import PartialUserSerializer, TokenSerializer, UserSerializer
 
 
 class CreateUserView(generics.CreateAPIView):
@@ -51,3 +51,15 @@ class LoginView(generics.ListCreateAPIView):
             return Response(serialized_token.data)
         return Response({'msg': 'unauthorized'},
                         status=status.HTTP_401_UNAUTHORIZED)
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = PartialUserSerializer
+
+    # permission_classes = [permissions.IsAuthenticated]
+
+    # def retrieve(self, request, pk):
+    #     user = User.objects.get(id=pk)
+    #     print('user =========================== ', repr(user))
+    #     return Response(user)

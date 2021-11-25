@@ -4,7 +4,7 @@ import axios from "axios";
 import { atom, useAtom } from "jotai";
 import Swal from "sweetalert2";
 
-export const tokenAtom = atom();
+export const tokenAtom = atom(null);
 
 const LoginSignup = (props) => {
   const { mode, constants } = props;
@@ -21,7 +21,6 @@ const LoginSignup = (props) => {
     axios
       .post(`/api/token/`, { username: username, password: password })
       .then((res) => {
-        console.log("login success");
         setToken(res.data);
         setStatus("resolved");
         Swal.fire({
@@ -32,7 +31,6 @@ const LoginSignup = (props) => {
         });
       })
       .catch((err) => {
-        console.log("login failed");
         setStatus("error");
         Swal.fire({
           icon: "error",
@@ -82,7 +80,6 @@ const LoginSignup = (props) => {
     } else if (e.target.name === "password") {
       setInputVal({ ...inputVal, password: e.target.value });
     }
-    console.log(inputVal);
   };
 
   return (

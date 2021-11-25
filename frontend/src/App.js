@@ -1,5 +1,8 @@
 import "./App.css";
 import "axios";
+import { tokenAtom } from "./components/pages/LoginSignup";
+import { Navigate } from "react-router-dom";
+import { useAtom } from "jotai";
 import { Route, Routes } from "react-router-dom";
 import LoginSignup from "./components/pages/LoginSignup";
 import Layout from "./components/Layout";
@@ -23,6 +26,8 @@ const constants = {
 };
 
 function App() {
+  const [token, setToken] = useAtom(tokenAtom);
+
   return (
     <div className="App">
       <Layout>
@@ -41,71 +46,140 @@ function App() {
           />
           <Route
             path="/dashboard"
-            element={<Dashboard constants={constants} />}
+            element={
+              token ? (
+                <Dashboard constants={constants} />
+              ) : (
+                <Navigate replace to="/login" />
+              )
+            }
           />
           <Route
             path="/myroutes/new"
             element={
-              <BrouteCreateUpdate
-                mode={constants.CREATE}
-                constants={constants}
-              />
+              token ? (
+                <BrouteCreateUpdate
+                  mode={constants.CREATE}
+                  constants={constants}
+                />
+              ) : (
+                <Navigate replace to="/login" />
+              )
             }
           />
           <Route
             path="/myroutes"
             element={
-              <BrouteList mode={constants.MYROUTES} constants={constants} />
+              token ? (
+                <BrouteList mode={constants.MYROUTES} constants={constants} />
+              ) : (
+                <Navigate replace to="/login" />
+              )
             }
           />
           <Route
             path="/myroutes/:r_id"
             element={
-              <BrouteView mode={constants.MYROUTES} constants={constants} />
+              token ? (
+                <BrouteView mode={constants.MYROUTES} constants={constants} />
+              ) : (
+                <Navigate replace to="/login" />
+              )
             }
           />
           <Route
             path="/broutes/:r_id/*"
             element={
-              <BrouteView mode={constants.FRIENDS} constants={constants} />
+              token ? (
+                <BrouteView mode={constants.FRIENDS} constants={constants} />
+              ) : (
+                <Navigate replace to="/login" />
+              )
             }
           >
             <Route
               path="comments/:c_id"
               element={
-                <CommentReply mode={constants.READ} constants={constants} />
+                token ? (
+                  <CommentReply mode={constants.READ} constants={constants} />
+                ) : (
+                  <Navigate replace to="/login" />
+                )
               }
             />
             <Route
               path="comments/new"
               element={
-                <CommentReply mode={constants.CREATE} constants={constants} />
+                token ? (
+                  <CommentReply mode={constants.CREATE} constants={constants} />
+                ) : (
+                  <Navigate replace to="/login" />
+                )
               }
             />
           </Route>
           <Route
             path="/friends"
-            element={<PeopleIndex mode={constants.FRIENDS} />}
+            element={
+              token ? (
+                <PeopleIndex mode={constants.FRIENDS} constants={constants} />
+              ) : (
+                <Navigate replace to="/login" />
+              )
+            }
           />
           <Route
             path="/friends/:userid"
-            element={<BrouteList mode={constants.FRIENDS} />}
+            element={
+              token ? (
+                <BrouteList mode={constants.FRIENDS} constants={constants} />
+              ) : (
+                <Navigate replace to="/login" />
+              )
+            }
           />
           <Route
             path="/people"
-            element={<PeopleIndex mode={constants.PEOPLE} />}
+            element={
+              token ? (
+                <PeopleIndex mode={constants.PEOPLE} constants={constants} />
+              ) : (
+                <Navigate replace to="/login" />
+              )
+            }
           />
           <Route
             path="/people/:userid"
-            element={<PeopleProfile mode={constants.PEOPLE} />}
+            element={
+              token ? (
+                <PeopleProfile mode={constants.PEOPLE} constants={constants} />
+              ) : (
+                <Navigate replace to="/login" />
+              )
+            }
           />
           <Route
             path="/to_review"
-            element={<PeopleIndex mode={constants.TO_REVIEW} />}
+            element={
+              token ? (
+                <PeopleIndex mode={constants.TO_REVIEW} constants={constants} />
+              ) : (
+                <Navigate replace to="/login" />
+              )
+            }
           />
           <Route
             path="/to_review/:userid"
-            element={<PeopleProfile mode={constants.TO_REVIEW} />}
+            element={
+              token ? (
+                <PeopleProfile
+                  mode={constants.TO_REVIEW}
+                  constants={constants}
+                />
+              ) : (
+                <Navigate replace to="/login" />
+              )
+            }
           />
         </Routes>
       </Layout>

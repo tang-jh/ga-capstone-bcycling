@@ -34,7 +34,6 @@ const Dashboard = () => {
         // Method to auto refresh token and continue the action
       });
   }, []);
-  console.log(token);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -55,7 +54,7 @@ const Dashboard = () => {
           className="col-sm-6 mx-auto"
           fields={["id", "username", "title", "distance", "difficulty"]}
           tableData={pageData ? pageData : []}
-          baseLink="/api/broutes/"
+          baseLink="/broutes/"
         />
       </Stack>
     </Container>
