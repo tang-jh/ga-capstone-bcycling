@@ -1,5 +1,5 @@
 from django.db.models.query import QuerySet
-from rest_framework import viewsets, generics
+from rest_framework import views, viewsets, generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.db.models import Q, Subquery
@@ -12,6 +12,15 @@ class BrouteViewSet(viewsets.ModelViewSet):
     queryset = Broute.objects.exclude(deleted__isnull=False)
     serializer_class = BrouteSerializer
     permission_classes = [IsAuthenticated]
+
+
+class BrouteListView(generics.ListAPIView):
+    serializer_class = BrouteSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        routes = Broute.objects.filter(userFK=self.kwargs['pk'])
+        return routes
 
 
 class DashboardView(generics.ListAPIView):

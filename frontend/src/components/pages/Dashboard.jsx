@@ -9,9 +9,10 @@ import { useNavigate } from "react-router";
 const Dashboard = () => {
   const [status, setStatus] = useState("idle");
   const [pageData, setPageData] = useState({});
-  const [token, setToken] = useAtom(tokenAtom);
+  const token = useAtom(tokenAtom)[0];
   const navigate = useNavigate();
 
+  // Fetch dashboard api
   useEffect(() => {
     setStatus("pending");
     axios
@@ -35,6 +36,7 @@ const Dashboard = () => {
       });
   }, []);
 
+  // Button method for creating new route
   const handleClick = (e) => {
     e.preventDefault();
     navigate("/myroutes/new");

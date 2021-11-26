@@ -42,7 +42,7 @@ const BrouteView = (props) => {
       .catch((err) => {
         console.log("Lookup failed", err.response.status);
       });
-  }, []);
+  }, [token]);
 
   // Fetch Broute detail
   useEffect(() => {
@@ -60,7 +60,7 @@ const BrouteView = (props) => {
         console.log(err.response);
         setStatus("error");
       });
-  }, []);
+  }, [token, params]);
 
   // Fetch route's comments
   useEffect(() => {
@@ -77,7 +77,7 @@ const BrouteView = (props) => {
       .catch((err) => {
         console.log(err);
       });
-  }, [handleNewComment]);
+  }, [token, params]);
 
   // Function for post fetch username matching
   const nameMatch = (namelist, id) => {
@@ -173,12 +173,12 @@ const BrouteView = (props) => {
       <Row>
         <Col sm={6}>
           <Stack gap={2}>
-            <h5>{pageData ? pageData.properties.title : <Loading />}</h5>
+            <h5>{pageData ? pageData?.properties?.title : <Loading />}</h5>
             <p>
               Distance:{" "}
               {pageData ? (
                 <NumberFormatter
-                  val={pageData.properties.distance}
+                  val={pageData?.properties?.distance}
                   decimalPlace={2}
                 />
               ) : (
@@ -187,10 +187,10 @@ const BrouteView = (props) => {
             </p>
             <p>
               Difficulty:{" "}
-              {pageData ? pageData.properties.difficulty : <Loading />}
+              {pageData ? pageData?.properties?.difficulty : <Loading />}
             </p>
             <p>Description</p>
-            <p>{pageData ? pageData.properties.description : <Loading />} </p>
+            <p>{pageData ? pageData?.properties?.description : <Loading />} </p>
           </Stack>
         </Col>
         <Col sm={6}>
