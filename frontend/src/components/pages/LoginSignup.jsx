@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { atom, useAtom } from "jotai";
 import Swal from "sweetalert2";
@@ -106,6 +106,11 @@ const LoginSignup = (props) => {
           disabled={inputVal?.password?.length >= 8 ? false : true}
         />
       </form>
+      {mode === constants.LOGIN ? (
+        <p>
+          Don't have an account? <Link to="/signup">Sign Up</Link>
+        </p>
+      ) : null}
     </Container>
   );
 };
