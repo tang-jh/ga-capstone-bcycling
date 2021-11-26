@@ -86,7 +86,7 @@ const BrouteList = (props) => {
           className="col-sm-6 mx-auto"
           fields={mode === constants.MYROUTES ? MYFIELDS : FRIENDFIELDS}
           tableData={pageData ? pageData : []}
-          baseLink="/api/broutes/"
+          baseLink="/broutes/"
         />
       </Stack>
     </Container>

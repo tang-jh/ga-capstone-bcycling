@@ -12,9 +12,10 @@ const PeopleThumb = (props) => {
     navigate(`/${apibase}/${props.userid}`);
   };
   //  src={faker.image.avatar()}
+  // faker.image.imageUrl(200, 250, "people")
   return (
     <Card style={{ width: "18rem" }} className="p-3" onClick={handleClick}>
-      <Card.Img variant="top" src={faker.image.imageUrl(200, 250, "people")} />
+      <Card.Img variant="top" src={"https://via.placeholder.com/150"} />
       <Card.Title>{props.username}</Card.Title>
     </Card>
   );

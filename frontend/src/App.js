@@ -88,7 +88,7 @@ function App() {
             }
           />
           <Route
-            path="/broutes/:r_id/*"
+            path="/broutes/:r_id/"
             element={
               token ? (
                 <BrouteView mode={constants.FRIENDS} constants={constants} />
