@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Card, Container } from "react-bootstrap";
-import faker from "faker";
+import { Card } from "react-bootstrap";
 
 const PeopleThumb = (props) => {
   const { userid, username, apibase } = props;
