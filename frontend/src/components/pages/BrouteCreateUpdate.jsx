@@ -26,7 +26,7 @@ const BrouteCreateUpdate = () => {
   // const fromInput = useRef(null);
   // const toInput = useRef(null);
   const navigate = useNavigate();
-  const [token, setToken] = useAtom(tokenAtom);
+  const token = useAtom(tokenAtom)[0];
   const [routepoint, setRoutepoint] = useState([]);
   const [route, setRoute] = useState({});
   const [disabled, setDisabled] = useState(true);
@@ -66,7 +66,7 @@ const BrouteCreateUpdate = () => {
         } else {
           setRoutepoint([...routepoint, coord]);
         }
-        console.log(routepoint);
+        console.log(routepoint, map);
       },
     });
     return routepoint
